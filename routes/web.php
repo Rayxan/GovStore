@@ -13,21 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+use App\Http\Controllers\AplicativoController;
 
-    $nome = "Raylis";
-    $arr = [1,2,3,4,5];
-    $nomes = ["Carlinhos", "Paulo", "Jorge", "Thigo"];
 
-    return view('welcome', 
-        [
-            'nome' => $nome,
-            'cic' => "Uva",
-            'arr' => $arr,
-            'nomes' => $nomes,
-        ]);
-});
+Route::get('/', [AplicativoController::class, 'index']);
+Route::get('/aplicativos/create', [AplicativoController::class, 'create']);
 
 Route::get('/products', function () {
-    return view('products');
+    
+    $busca = request('search');
+
+    return view('products', ['busca' => $busca]);
+});
+
+Route::get('/products_teste/{id?}', function ($id = null) {
+    return view('product', ['id' => $id]);
 });

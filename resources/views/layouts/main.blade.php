@@ -22,12 +22,37 @@
     <script src="/js/scripts.js"></script>
 
 </head>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="collapse navbar-collapse" id="navbar">
+            <a href="/" class="navbar-brand">
+                <img src="/img/logo.svg" alt="logo">
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="/" class="nav-link">Aplicativos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/aplicativos/create" class="nav-link">Criar Aplicativos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/" class="nav-link">Entrar</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/" class="nav-link">Cadastrar </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
 
 <body>
     @yield('content')
     <footer>
-            <p>HDC Events &copy; 2022</p>
+        <p>HDC Events &copy; 2022</p>
     </footer>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>
