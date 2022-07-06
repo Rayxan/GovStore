@@ -15,10 +15,11 @@ class CreateAplicativosTable extends Migration
     {
         Schema::create('aplicativos', function (Blueprint $table) {
             $table->id();
-            $table->string('nm_nome_aplicativo', 100);
-            $table->string('ds_descricao_aplicativo', 255);
-            $table->string('ds_link_aplicativo', 255);
-            $table->char('tp_status',3);
+            $table->string('nm_nome', 54);
+            $table->string('ds_descricao', 140);
+            $table->string('ds_link', 255);
+            $table->char('tp_status', 3)->nullable();
+            $table->char('tp_tipo_app', 3);
             $table->timestamps();
         });
     }

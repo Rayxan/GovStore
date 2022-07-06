@@ -18,14 +18,4 @@ use App\Http\Controllers\AplicativoController;
 
 Route::get('/', [AplicativoController::class, 'index']);
 Route::get('/aplicativos/create', [AplicativoController::class, 'create']);
-
-Route::get('/products', function () {
-    
-    $busca = request('search');
-
-    return view('products', ['busca' => $busca]);
-});
-
-Route::get('/products_teste/{id?}', function ($id = null) {
-    return view('product', ['id' => $id]);
-});
+Route::post('/aplicativos', [AplicativoController::class, 'store']);
