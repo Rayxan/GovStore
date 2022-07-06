@@ -32,6 +32,21 @@ class AplicativoController extends Controller
         $aplicativo->ds_descricao = $request->ds_descricao;
         $aplicativo->tp_tipo_app = $request->tp_tipo_app;
 
+        // Image Upload
+        if($request->hasFile('image') && $request->file('image')->isValid()) {
+
+            $requestImage = $request->image;
+
+            $extension = $requestImage->extension();
+
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+
+            $request->image->move(public_path('img/aplicativos'), $imageName);
+
+            $aplicativo->image = $imageName;
+        }
+
+
         $aplicativo->save();
 
         return redirect('/')->with('msg', 'Aplicativo enviado para aprovação!');

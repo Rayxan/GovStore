@@ -6,8 +6,14 @@
 
 <div id="aplicativo-create-container" class="col-md-6 offset-md-3">
     <h1>Novo Aplicativo</h1>
-    <form action="/aplicativos" method="POST">
+    <form action="/aplicativos" method="POST" enctype="multipart/form-data">
         @csrf
+        <div class="form-group">
+            <label for="image">Imagem do Evento</label>
+            <div class="col-md-2">
+                <input type="file" id="image" name="image" class="form-control-file">
+            </div>
+        </div>
         <div class="form-group">
             <label for="title">Nome da Aplicação</label>
             <div class="col-md-2">

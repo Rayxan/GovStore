@@ -17,7 +17,7 @@
         @foreach($aplicativos as $aplicativo)
         <div class="card col-md-3">
             <h5 class="card-name">{{ $aplicativo->nm_nome}}</h5>
-            <img src="/img/beijaflor.jpg" alt="{{ $aplicativo->nm_nome}}">
+            <img src="/img/aplicativos/{{ $aplicativo->image }}" alt="{{ $aplicativo->nm_nome}}">
             <div class="card-body">
                 <p class="card-description">{{$aplicativo->ds_descricao}}</p>
                 <a href="{{ $aplicativo->ds_link }}" class="btn btn-primary">Acessar</a>
