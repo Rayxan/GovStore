@@ -46,7 +46,6 @@ class AplicativoController extends Controller
             $aplicativo->image = $imageName;
         }
 
-
         $aplicativo->save();
 
         return redirect('/')->with('msg', 'Aplicativo enviado para aprovação!');

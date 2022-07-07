@@ -36,7 +36,7 @@
                     <a href="/aplicativos/create" class="nav-link">Criar Aplicativos</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/" class="nav-link">Entrar</a>
+                    <a href="/login" class="nav-link">Entrar</a>
                 </li>
                 <li class="nav-item">
                     <a href="/" class="nav-link">Cadastrar </a>
