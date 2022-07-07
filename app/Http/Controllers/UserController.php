@@ -13,7 +13,7 @@ class UserController extends Controller
 
     public function auth(Request $request){
 
-        $request->password = bcrypt($request->password);
+        // $request->password = bcrypt($request->password);
 
         $this->validate($request, [
             'email' => 'required',
