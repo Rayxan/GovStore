@@ -24,3 +24,9 @@ Route::get('/login', [UserController::class, 'login'])->name('login.page');
 Route::post('/auth', [UserController::class, 'auth'])->name('auth.user');
 
 Route::post('/aplicativos', [AplicativoController::class, 'store']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::view('home', 'home')->middleware('auth');
