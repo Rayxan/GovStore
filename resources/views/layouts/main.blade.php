@@ -20,6 +20,7 @@
 
     <!-- CSS da aplicação -->
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/app.css">
 
     
 

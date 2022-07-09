@@ -46,8 +46,24 @@ class AplicativoController extends Controller
             $aplicativo->image = $imageName;
         }
 
+        $user = auth()->user();
+        $aplicativo->user_id = $user->id;
+
         $aplicativo->save();
 
         return redirect('/')->with('msg', 'Aplicativo enviado para aprovação!');
     }
+
+
+    public function show($id) {
+        $aplicativo = Aplicativo::findOrFail($id);
+
+        return view('aplicativos.show', ['aplicativo' => $aplicativo]);
+    }
+
+    // public function dashboard(){
+    //     $user = auth()->user;
+
+    //     $aplicativos = $user
+    // }
 }

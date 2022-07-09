@@ -11,7 +11,7 @@
         <div class="form-group">
             <label for="image">Imagem do Evento</label>
             <div class="col-md-2">
-                <input type="file" id="image" name="image" class="form-control-file">
+                <input style="width: 300px;" type="file" id="image" name="image" class="form-control-file">
             </div>
         </div>
         <div class="form-group">

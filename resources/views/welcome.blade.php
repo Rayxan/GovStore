@@ -23,6 +23,7 @@
                 <div class="card-body">
                     <p class="card-description">{{$aplicativo->ds_descricao}}</p>
                     <a href="{{ $aplicativo->ds_link }}" class="btn btn-primary">Acessar</a>
+                    <a href="/aplicativos/{{ $aplicativo->id }}">Saber mais...</a>
                 </div>
             </div>
             @endif
@@ -38,6 +39,7 @@
                 <div class="card-body">
                     <p class="card-description">{{$aplicativo->ds_descricao}}</p>
                     <a href="{{ $aplicativo->ds_link }}" class="btn btn-primary">Acessar</a>
+                    <a href="/aplicativos/{{ $aplicativo->id }}">Saber mais...</a>
                 </div>
             </div>
             @endif
