@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Aplicativo;
-
+use App\Models\User;
 class AplicativoController extends Controller
 {
     public function index() {
@@ -58,7 +58,9 @@ class AplicativoController extends Controller
     public function show($id) {
         $aplicativo = Aplicativo::findOrFail($id);
 
-        return view('aplicativos.show', ['aplicativo' => $aplicativo]);
+        $aplicativoOwner =  User::where('id', $aplicativo->user_id)->first()->toArray();
+
+        return view('aplicativos.show', ['aplicativo' => $aplicativo, 'aplicativoOwner' => $aplicativoOwner]);
     }
 
     // public function dashboard(){

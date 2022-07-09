@@ -14,7 +14,8 @@
         </div>
         <div class="col-md-12" id="description-container">
             <h3>Sobre o Aplicativo:</h3>
-            <p class="event-description"> {{$aplicativo->ds_descricao}}</p>            
+            <p class="event-description"> {{$aplicativo->ds_descricao}}</p>     
+            <p class="aplicativo-owner">Criado por:     {{$aplicativoOwner['name']}}</p>       
         </div>
     </div>
 </div>
