@@ -20,6 +20,4 @@ Route::get('/aplicativos/create', [AplicativoController::class, 'create']);
 
 Route::post('/aplicativos', [AplicativoController::class, 'store']);
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::view('home', 'home')->middleware('auth');

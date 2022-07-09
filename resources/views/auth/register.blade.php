@@ -4,6 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+        <a href="\"><-Tela inicial</a>
             <div class="card">
                 <div class="card-header">{{ __('Faça Seu Cadastro') }}</div>
 
@@ -71,6 +72,8 @@
                     </form>
                 </div>
             </div>
+            <a href="\login"><-Voltar para login</a>
+
         </div>
     </div>
 </div>

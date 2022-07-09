@@ -9,7 +9,6 @@
 
     <script src="{{ asset('js/app.js') }}" defer></script>
 
-
     <!-- Fonte do Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,6 +20,8 @@
 
     <!-- CSS da aplicação -->
     <link rel="stylesheet" href="/css/styles.css">
+
+    
 
     <script src="/js/scripts.js"></script>
 
