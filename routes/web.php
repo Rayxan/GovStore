@@ -14,19 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 use App\Http\Controllers\AplicativoController;
-use App\Http\Controllers\UserController;
 
 Route::get('/', [AplicativoController::class, 'index']);
 Route::get('/aplicativos/create', [AplicativoController::class, 'create']);
 
-// Rotas para Login
-Route::get('/login', [UserController::class, 'login'])->name('login.page');
-Route::post('/auth', [UserController::class, 'auth'])->name('auth.user');
-
 Route::post('/aplicativos', [AplicativoController::class, 'store']);
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::view('home', 'home')->middleware('auth');
