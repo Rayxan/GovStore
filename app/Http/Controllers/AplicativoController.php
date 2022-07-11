@@ -19,7 +19,7 @@ class AplicativoController extends Controller
             ]);
     }
 
-    public function create(){
+    public function create() {
         return view('aplicativos.create');
     }
 
@@ -63,11 +63,20 @@ class AplicativoController extends Controller
         return view('aplicativos.show', ['aplicativo' => $aplicativo, 'aplicativoOwner' => $aplicativoOwner]);
     }
 
-    public function dashboard(){
+    public function dashboard() {
         $user = auth()->user();
-
+        
         $aplicativos = $user->aplicativos;
+        // dd($aplicativos = $user->aplicativos);
+        
+        // $aplicativo_status = $aplicativos[0]->tp_status;
 
         return view('aplicativos.dashboard', ['aplicativos' => $aplicativos]);
+    }
+
+    public function destroy($id) {
+        Aplicativo::findOrFail($id)->delete();
+
+        return redirect('/dashboard')->with('msg', 'Evento excluído com sucesso');
     }
 }

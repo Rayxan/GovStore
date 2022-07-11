@@ -20,9 +20,22 @@
         <tbody>
             @foreach($aplicativos as $aplicativo)
             <tr>
-                <td scope="row">{{$loop->index+1}}</td>
                 <td><a href="/aplicativos/{{$aplicativo->id}}">{{$aplicativo->nm_nome}}</a></td>
-                <td><a href="#">Editar</a> <a href="#">Deletar</a></td>
+                <td>
+                    @if($aplicativo->tp_status == 'APV')
+                        Aprovado
+                    @else
+                        Pendente
+                    @endif
+                </td>
+                <td>
+                    <a href="#" class="btn btn-info edit-btn"><ion-icon name="create-outline"></ion-icon>Editar</a>
+                    <form action="/aplicativos/{{$aplicativo->id}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger delete-btn"><ion-icon name="trash-outline"></ion-icon>Deletar</button>
+                    </form>
+                </td>
             </tr>
             @endforeach
         </tbody>

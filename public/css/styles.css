@@ -134,7 +134,10 @@ header {
 
 .dashboard-aplicativos-container th {
     width: 25%;
-    
+}
+
+.dashboard-aplicativos-container form {
+    display: inline-block;
 }
 
 /*footer*/
