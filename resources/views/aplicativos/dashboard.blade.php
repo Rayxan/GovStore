@@ -29,11 +29,11 @@
                     @endif
                 </td>
                 <td>
-                    <a href="#" class="btn btn-info edit-btn"><ion-icon name="create-outline"></ion-icon>Editar</a>
+                    <a href="#" class="btn btn-info edit-btn"><ion-icon name="create-outline"></ion-icon></a>
                     <form action="/aplicativos/{{$aplicativo->id}}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger delete-btn"><ion-icon name="trash-outline"></ion-icon>Deletar</button>
+                        <button type="submit" class="btn btn-danger delete-btn"><ion-icon name="trash-outline"></ion-icon></button>
                     </form>
                 </td>
             </tr>
