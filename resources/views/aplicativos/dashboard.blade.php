@@ -29,7 +29,7 @@
                     @endif
                 </td>
                 <td>
-                    <a href="#" class="btn btn-info edit-btn"><ion-icon name="create-outline"></ion-icon></a>
+                    <a href="/aplicativos/edit/{{$aplicativo->id}}" class="btn btn-info edit-btn"><ion-icon name="create-outline"></ion-icon></a>
                     <form action="/aplicativos/{{$aplicativo->id}}" method="POST">
                         @csrf
                         @method('DELETE')
