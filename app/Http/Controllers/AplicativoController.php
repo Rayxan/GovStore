@@ -63,9 +63,11 @@ class AplicativoController extends Controller
         return view('aplicativos.show', ['aplicativo' => $aplicativo, 'aplicativoOwner' => $aplicativoOwner]);
     }
 
-    // public function dashboard(){
-    //     $user = auth()->user;
+    public function dashboard(){
+        $user = auth()->user();
 
-    //     $aplicativos = $user
-    // }
+        $aplicativos = $user->aplicativos;
+
+        return view('aplicativos.dashboard', ['aplicativos' => $aplicativos]);
+    }
 }
