@@ -16,7 +16,7 @@
     <div id="cards-container" class="row">
         <h1>Aplicativos de Suporte ao SICGESP</h1>
         @foreach($aplicativos as $aplicativo)
-            @if($aplicativo->tp_tipo_app == 'SIC')
+            @if($aplicativo->tp_tipo_app == 'SIC' && $aplicativo->tp_status == 'APV')
             <div class="card col-md-3">
                 <h5 class="card-name">{{ $aplicativo->nm_nome}}</h5>
                 <img src="/img/aplicativos/{{ $aplicativo->image }}" alt="{{ $aplicativo->nm_nome}}">
@@ -32,7 +32,7 @@
     <div id="cards-container1" class="row">
         <h1>Projeto Sala de Gestão e Governança da Educação Básica</h1>
         @foreach($aplicativos as $aplicativo)
-            @if($aplicativo->tp_tipo_app != 'SIC')
+            @if($aplicativo->tp_tipo_app != 'SIC' && $aplicativo->tp_status == 'APV')
             <div class="card col-md-3">
                 <h5 class="card-name">{{ $aplicativo->nm_nome}}</h5>
                 <img src="/img/aplicativos/{{ $aplicativo->image }}" alt="{{ $aplicativo->nm_nome}}">

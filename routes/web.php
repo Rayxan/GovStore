@@ -27,3 +27,11 @@ Route::get('/aplicativos/edit/{id}', [AplicativoController::class, 'edit'])->mid
 Route::put('/aplicativos/update/{id}', [AplicativoController::class, 'update'])->middleware('auth');
 
 Route::get('/dashboard', [AplicativoController::class, 'dashboard'])->middleware('auth');
+
+// Route::middleware(['admin'])->group (function(){
+//     Route::get('/aplicativos/edit/{id}', [AplicativoController::class, 'edit'])->middleware('auth');
+//     Route::put('/aplicativos/update/{id}', [AplicativoController::class, 'update'])->middleware('auth');
+// });
+
+// Route::middleware(['client'])->group (function(){
+// });
