@@ -95,7 +95,9 @@ class AplicativoController extends Controller
     {
         $aplicativo = Aplicativo::findOrFail($id);
 
-        return view('aplicativos.edit', ['aplicativo' => $aplicativo]);
+        $userAdmin = auth()->user()->admin;
+
+        return view('aplicativos.edit', ['aplicativo' => $aplicativo, 'userAdmin' => $userAdmin]);
     }
 
     public function update(Request $request)
@@ -117,6 +119,8 @@ class AplicativoController extends Controller
 
             $requestImage = $request->image;
             
+            // dd($requestImage);
+
             $extension = $requestImage->extension();
 
             $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;

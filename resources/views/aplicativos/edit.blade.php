@@ -39,7 +39,11 @@
                 <option value="GEG" {{$aplicativo->tp_tipo_app != 'SIC' ? "selected='selected'" : "" }}>Gestão e Governança</option>
             </select>
         </div>
-        <input type="submit" class="btn btn-primary" value="Editar Aplicativo">
+        @if($aplicativo->tp_status == "PEN")
+            <input type="submit" class="btn btn-success" value="Aprovar Edição">
+        @else
+            <input type="submit" class="btn btn-primary" value="Editar Aplicativo">
+        @endif
     </form>
 </div>
 

@@ -17,13 +17,13 @@
         <div class="form-group">
             <label for="title">Nome da Aplicação</label>
             <div class="col-md-2">
-                <input type="text" class="" id="nm_nome" name="nm_nome" placeholder="Digite o nome da Aplicação.">
+                <input style="width:577px;" type="text" class="" id="nm_nome" name="nm_nome" placeholder="Digite o nome da Aplicação.">
             </div>
         </div>
         <div class="form-group">
             <label for="title">Link</label>
             <div class="col-md-2">
-                <input type="text" class="" id="ds_link" name="ds_link" placeholder="Digite o link da Aplicação.">
+                <input style="width:577px;" type="text" class="" id="ds_link" name="ds_link" placeholder="Digite o link da Aplicação.">
             </div>
         </div>
         <div class="form-group">
