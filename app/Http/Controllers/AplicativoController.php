@@ -104,7 +104,8 @@ class AplicativoController extends Controller
 
         // Retorna se o usuário é adm
         $userAdmin = auth()->user()->admin;
-        
+
+        // Se o usuário estiver solicitando alteração o status passa a ser pendente
         if($userAdmin){
             $data['tp_status'] = "APV";
         }else{
@@ -115,7 +116,7 @@ class AplicativoController extends Controller
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
 
             $requestImage = $request->image;
-
+            
             $extension = $requestImage->extension();
 
             $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
@@ -125,7 +126,15 @@ class AplicativoController extends Controller
             $data['image'] = $imageName;
         }
 
-        Aplicativo::findOrFail($request->id)->update($data);
+        // Se o status for 'Pendente' quer dizer que o usuário está solicitando alteração,
+        // logo, é criado um novo registro na tabela.
+        if($data['tp_status'] == "PEN"){
+            $user = auth()->user();
+            $data['user_id'] = $user->id;
+            Aplicativo::findOrFail($request->id)->create($data);
+        }else{
+            Aplicativo::findOrFail($request->id)->update($data);
+        }
 
         return redirect('/dashboard')->with('msg', 'Evento editado com sucesso');
     }
