@@ -93,7 +93,6 @@ class AplicativoController extends Controller
 
     public function edit($id)
     {
-
         $aplicativo = Aplicativo::findOrFail($id);
 
         return view('aplicativos.edit', ['aplicativo' => $aplicativo]);
@@ -108,6 +107,8 @@ class AplicativoController extends Controller
         
         if($userAdmin){
             $data['tp_status'] = "APV";
+        }else{
+            $data['tp_status'] = "PEN";
         }
 
         // Image Upload
