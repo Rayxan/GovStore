@@ -11,7 +11,6 @@ class AplicativoController extends Controller
 {
     public function index()
     {
-
         //Retorna todos os aplicativos salvos no banco
         $aplicativos = Aplicativo::all();
 
@@ -30,13 +29,13 @@ class AplicativoController extends Controller
 
     public function store(Request $request)
     {
-
         $aplicativo = new Aplicativo;
 
         $aplicativo->nm_nome = $request->nm_nome;
         $aplicativo->ds_link = $request->ds_link;
         $aplicativo->ds_descricao = $request->ds_descricao;
         $aplicativo->tp_tipo_app = $request->tp_tipo_app;
+        $aplicativo->tp_status = "PEN";
 
         // Image Upload
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
@@ -73,13 +72,16 @@ class AplicativoController extends Controller
     public function dashboard()
     {
         $user = auth()->user();
-
+        
         $aplicativos = $user->aplicativos;
-        // dd($aplicativos = $user->aplicativos);
 
-        // $aplicativo_status = $aplicativos[0]->tp_status;
+        $userAdmin = auth()->user()->admin;
 
-        return view('aplicativos.dashboard', ['aplicativos' => $aplicativos]);
+        if($userAdmin){
+            $aplicativos = Aplicativo::all();
+        }
+        
+        return view('aplicativos.dashboard', ['aplicativos' => $aplicativos, 'userAdmin' => $userAdmin]);
     }
 
     public function destroy($id)
@@ -99,8 +101,14 @@ class AplicativoController extends Controller
 
     public function update(Request $request)
     {
-
         $data = $request->all();
+
+        // Retorna se o usuário é adm
+        $userAdmin = auth()->user()->admin;
+        
+        if($userAdmin){
+            $data['tp_status'] = "APV";
+        }
 
         // Image Upload
         if ($request->hasFile('image') && $request->file('image')->isValid()) {

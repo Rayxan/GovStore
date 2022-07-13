@@ -35,8 +35,9 @@
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger delete-btn"><ion-icon name="trash-outline"></ion-icon></button>
                     </form>
-                    <!-- mudar a class do botão e etc -->
-                    <!-- <a href="/aplicativos/edit/{{$aplicativo->id}}" class="btn btn-success edit-btn"><ion-icon name="checkmark-circle-outline"></ion-icon></a> -->
+                    @if($aplicativo->tp_status == 'PEN' && $userAdmin)
+                        <a href="/aplicativos/edit/{{$aplicativo->id}}" class="btn btn-success edit-btn"><ion-icon name="checkmark-circle-outline"></ion-icon></a>
+                    @endif
                 </td>
             </tr>
             @endforeach
