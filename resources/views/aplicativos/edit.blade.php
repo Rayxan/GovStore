@@ -4,6 +4,8 @@
 
 @section('content')
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
 <div id="aplicativo-create-container" class="col-md-6 offset-md-3">
     <h1>Editando {{$aplicativo->nm_nome}}</h1>
     <form action="/aplicativos/update/{{$aplicativo->id}}" method="POST" enctype="multipart/form-data">
@@ -11,11 +13,12 @@
         @method('PUT')
         <div class="form-group">
             <label for="image">Imagem do Evento</label>
-            <div class="col-md-2">
+            <div class="col-md-2" id="imagem">
                 <input style="width: 300px;" type="file" id="image" name="image" class="form-control-file">
                 <img src="/img/aplicativos/{{$aplicativo->image}}" class="img-preview" alt="{{$aplicativo->nm_nome}}">
             </div>
         </div>
+        <input type="hidden" value="{{$aplicativo->image}}" name="image">
         <div class="form-group">
             <label for="title">Nome da Aplicação</label>
             <div class="col-md-2">
@@ -39,12 +42,21 @@
                 <option value="GEG" {{$aplicativo->tp_tipo_app != 'SIC' ? "selected='selected'" : "" }}>Gestão e Governança</option>
             </select>
         </div>
-        @if($aplicativo->tp_status == "PEN")
-            <input type="submit" class="btn btn-success" value="Aprovar Edição">
+        @if(($aplicativo->tp_status == "PEN") && $userAdmin)
+        <input type="submit" class="btn btn-success" value="Aprovar Edição" id="editar">
         @else
-            <input type="submit" class="btn btn-primary" value="Editar Aplicativo">
+        <input type="submit" class="btn btn-primary" value="Editar Aplicativo" id="editar">
         @endif
     </form>
 </div>
 
 @endsection
+
+<script>
+    var imagem = ('#imagem img').attr('src');
+    console.log(imagem);
+
+    $(".editar").click(function() {
+        alert("Handler for .click() called.");
+    });
+</script>

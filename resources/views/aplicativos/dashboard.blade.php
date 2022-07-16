@@ -24,6 +24,10 @@
                 <td>
                     @if($aplicativo->tp_status == 'APV')
                         Aprovado
+                    @elseif($aplicativo->tp_status == 'ATU')
+                        Atualizado
+                    @elseif($aplicativo->tp_status == 'ANT')
+                        Antigo
                     @else
                         Pendente
                     @endif

@@ -37,6 +37,16 @@ class AplicativoController extends Controller
         $aplicativo->tp_tipo_app = $request->tp_tipo_app;
         $aplicativo->tp_status = "PEN";
 
+        $userAdmin = auth()->user()->admin;
+        
+
+
+        // if($userAdmin){
+            //     $aplicativo->tp_status = "APV";
+            // }else{
+            //     $aplicativo->tp_status = "PEN";
+        // }
+
         // Image Upload
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
 
@@ -97,56 +107,95 @@ class AplicativoController extends Controller
 
         $userAdmin = auth()->user()->admin;
 
+        if($userAdmin && ($aplicativo->tp_status == "APV")){
+            $aplicativo->tp_status = "ATU"; 
+        }
+
+        if(!$userAdmin && ($aplicativo->tp_status == "APV")){
+            $aplicativo->tp_status = "PEN"; 
+        }
+
+        if(!$userAdmin && ($aplicativo->tp_status == "PEN")){
+            $aplicativo->tp_status = "PEN"; 
+        }
+
+        // if($userAdmin && ($aplicativo->tp_status == "PEN")){
+        //     $aplicativo->tp_status = "ATU"; 
+        // }
+
+        if(!$userAdmin && ($aplicativo->tp_status == "ATU")){
+            $aplicativo->tp_status = "ANT"; 
+        }
+
+        // if($userAdmin && ($aplicativo->tp_status == "ATU")){
+        //     $aplicativo->tp_status = "ANT"; 
+        // }
+
+        $aplicativo->save();
+
+        // dd($aplicativo->tp_status);
+
         return view('aplicativos.edit', ['aplicativo' => $aplicativo, 'userAdmin' => $userAdmin]);
     }
 
     public function update(Request $request)
     {
+        // dd($aplicativos);
+
         $data = $request->all();
 
         // dd($data);
 
-        // // Retorna se o usuário é adm
-        // $userAdmin = auth()->user()->admin;
+        // Retorna se o usuário é adm
+        $userAdmin = auth()->user()->admin;
 
-        // // Se o usuário estiver solicitando alteração o status passa a ser pendente
-        // if($userAdmin){
-        //     $data['tp_status'] = "APV";
-        // }else{
-        //     $data['tp_status'] = "PEN";
+        // // Verifica se o aplicativo já está sendo exibido na página inicial
+        // if($data['tp_status'] == "APV"){
+        //     $foiAprovado = 1;
         // }
+
+        // Se o usuário estiver solicitando alteração o status passa a ser pendente
+        if($userAdmin){
+            $data['tp_status'] = "ATU";
+        }else{
+            $data['tp_status'] = "PEN";
+        }
 
         // Image Upload
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
 
             $requestImage = $request->image;
             
-            // dd($requestImage);
-
+            
             $extension = $requestImage->extension();
-
+            
             $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
-
+            
+            
             $request->image->move(public_path('img/aplicativos'), $imageName);
 
             $data['image'] = $imageName;
+            
         }
+        
+        // dd($data['image']);
 
-        // // Se o status for 'Pendente' quer dizer que o usuário está solicitando alteração,
-        // // logo, é criado um novo registro na tabela.
-        // if($data['tp_status'] == "PEN"){
-        //     $user = auth()->user();
-        //     $data['user_id'] = $user->id;
+        // Se o status for 'Pendente' quer dizer que o usuário está solicitando alteração,
+        // logo, é criado um novo registro na tabela.
+        if($data['tp_status'] == "PEN"){
+            $user = auth()->user();
+            $data['user_id'] = $user->id;
 
-        //     // $data['image'] = $request->image;
+            // $data['image'] = $request->image;
 
-        //     Aplicativo::findOrFail($request->id)->create($data);
-
-        //     return redirect('/dashboard')->with('msg', 'Aplicativo enviado para aprovação!');
-        // }else{
+            // Aplicativo::findOrFail($request->id)->delete();
+            Aplicativo::findOrFail($request->id)->create($data);
+            
+            return redirect('/dashboard')->with('msg', 'Aplicativo enviado para aprovação!');
+        }else{
             Aplicativo::findOrFail($request->id)->update($data);
             return redirect('/dashboard')->with('msg', 'Aplicativo editado com sucesso!');
-        // }
+        }
 
     }
 }
