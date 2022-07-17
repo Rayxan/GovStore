@@ -51,12 +51,3 @@
 </div>
 
 @endsection
-
-<script>
-    var imagem = ('#imagem img').attr('src');
-    console.log(imagem);
-
-    $(".editar").click(function() {
-        alert("Handler for .click() called.");
-    });
-</script>

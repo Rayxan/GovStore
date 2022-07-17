@@ -28,17 +28,29 @@
                         Atualizado
                     @elseif($aplicativo->tp_status == 'ANT')
                         Antigo
+                    @elseif($aplicativo->tp_status == 'EXC')
+                        Solicitado para exclusão
                     @else
                         Pendente
                     @endif
                 </td>
                 <td>
                     <a href="/aplicativos/edit/{{$aplicativo->id}}" class="btn btn-info edit-btn"><ion-icon name="create-outline"></ion-icon></a>
-                    <form action="/aplicativos/{{$aplicativo->id}}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger delete-btn"><ion-icon name="trash-outline"></ion-icon></button>
-                    </form>
+                    @if($userAdmin)
+                        <form action="/aplicativos/{{$aplicativo->id}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger delete-btn"><ion-icon name="trash-outline"></ion-icon></button>
+                        </form>
+                    @elseif(!$userAdmin && ($aplicativo->tp_status != "EXC"))
+                        <form action="/aplicativos/solicitar-excluir/{{$aplicativo->id}}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-warning delete-btn"><ion-icon name="trash-outline"></ion-icon></button>
+                        </form>
+                    @endif
+
+
+
                     @if($aplicativo->tp_status == 'PEN' && $userAdmin)
                         <a href="/aplicativos/edit/{{$aplicativo->id}}" class="btn btn-success edit-btn"><ion-icon name="checkmark-circle-outline"></ion-icon></a>
                     @endif

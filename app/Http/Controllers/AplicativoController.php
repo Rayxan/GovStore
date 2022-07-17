@@ -198,4 +198,16 @@ class AplicativoController extends Controller
         }
 
     }
+
+    public function aparecerExcluir($id){
+        
+        $aplicativo = Aplicativo::findOrFail($id);
+
+        $aplicativo->tp_status = "EXC";
+
+        $aplicativo->save();
+
+        return redirect('/dashboard')->with('msg', 'Evento eviado para exclusão com sucesso');
+    }
 }
+
