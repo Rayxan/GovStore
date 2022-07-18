@@ -98,7 +98,7 @@ class AplicativoController extends Controller
     {
         Aplicativo::findOrFail($id)->delete();
 
-        return redirect('/dashboard')->with('msg', 'Evento excluído com sucesso');
+        return redirect('/dashboard')->with('msg', 'Aplicativo excluído com sucesso');
     }
 
     public function edit($id)
@@ -207,7 +207,7 @@ class AplicativoController extends Controller
 
         $aplicativo->save();
 
-        return redirect('/dashboard')->with('msg', 'Evento eviado para exclusão com sucesso');
+        return redirect('/dashboard')->with('msg', 'Aplicativo solicitado para exclusão com sucesso!');
     }
 }
 
