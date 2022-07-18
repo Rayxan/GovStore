@@ -4,6 +4,7 @@
 
 @section('content')
 
+<!-- Barra de pesquisa -->
 <!-- <div class="col-md-12" id="search-container">
     <h1>Busque um aplicativo</h1>
     <form action="">

@@ -27,6 +27,7 @@ class AplicativoController extends Controller
         return view('aplicativos.create');
     }
 
+    // Método usado para criar um aplicativo
     public function store(Request $request)
     {
         $aplicativo = new Aplicativo;
@@ -38,14 +39,6 @@ class AplicativoController extends Controller
         $aplicativo->tp_status = "PEN";
 
         $userAdmin = auth()->user()->admin;
-        
-
-
-        // if($userAdmin){
-            //     $aplicativo->tp_status = "APV";
-            // }else{
-            //     $aplicativo->tp_status = "PEN";
-        // }
 
         // Image Upload
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
@@ -69,7 +62,7 @@ class AplicativoController extends Controller
         return redirect('/')->with('msg', 'Aplicativo enviado para aprovação!');
     }
 
-
+    // Método usado para mostrar informações de um aplicativo
     public function show($id)
     {
         $aplicativo = Aplicativo::findOrFail($id);
@@ -79,6 +72,7 @@ class AplicativoController extends Controller
         return view('aplicativos.show', ['aplicativo' => $aplicativo, 'aplicativoOwner' => $aplicativoOwner]);
     }
 
+    // Método utilizado para exibir lista de aplicativos cadastrados e sob pendências
     public function dashboard()
     {
         $user = auth()->user();
@@ -94,6 +88,7 @@ class AplicativoController extends Controller
         return view('aplicativos.dashboard', ['aplicativos' => $aplicativos, 'userAdmin' => $userAdmin]);
     }
 
+    // Método usado para excluir um aplicativo
     public function destroy($id)
     {
         Aplicativo::findOrFail($id)->delete();
@@ -101,6 +96,7 @@ class AplicativoController extends Controller
         return redirect('/dashboard')->with('msg', 'Aplicativo excluído com sucesso');
     }
 
+    // Método usado para editar um aplicativo
     public function edit($id)
     {
         $aplicativo = Aplicativo::findOrFail($id);
@@ -119,40 +115,22 @@ class AplicativoController extends Controller
             $aplicativo->tp_status = "PEN"; 
         }
 
-        // if($userAdmin && ($aplicativo->tp_status == "PEN")){
-        //     $aplicativo->tp_status = "ATU"; 
-        // }
-
         if(!$userAdmin && ($aplicativo->tp_status == "ATU")){
             $aplicativo->tp_status = "ANT"; 
         }
 
-        // if($userAdmin && ($aplicativo->tp_status == "ATU")){
-        //     $aplicativo->tp_status = "ANT"; 
-        // }
-
         $aplicativo->save();
-
-        // dd($aplicativo->tp_status);
 
         return view('aplicativos.edit', ['aplicativo' => $aplicativo, 'userAdmin' => $userAdmin]);
     }
 
+    // Método utilizado para atualizar um aplicativo
     public function update(Request $request)
     {
-        // dd($aplicativos);
-
         $data = $request->all();
-
-        // dd($data);
 
         // Retorna se o usuário é adm
         $userAdmin = auth()->user()->admin;
-
-        // // Verifica se o aplicativo já está sendo exibido na página inicial
-        // if($data['tp_status'] == "APV"){
-        //     $foiAprovado = 1;
-        // }
 
         // Se o usuário estiver solicitando alteração o status passa a ser pendente
         if($userAdmin){
@@ -178,17 +156,12 @@ class AplicativoController extends Controller
             
         }
         
-        // dd($data['image']);
-
         // Se o status for 'Pendente' quer dizer que o usuário está solicitando alteração,
         // logo, é criado um novo registro na tabela.
         if($data['tp_status'] == "PEN"){
             $user = auth()->user();
             $data['user_id'] = $user->id;
 
-            // $data['image'] = $request->image;
-
-            // Aplicativo::findOrFail($request->id)->delete();
             Aplicativo::findOrFail($request->id)->create($data);
             
             return redirect('/dashboard')->with('msg', 'Aplicativo enviado para aprovação!');
@@ -199,6 +172,7 @@ class AplicativoController extends Controller
 
     }
 
+    // Método usado para trocar o status do aplicativo e aparecer o botão de solicitação de exclusão
     public function aparecerExcluir($id){
         
         $aplicativo = Aplicativo::findOrFail($id);
