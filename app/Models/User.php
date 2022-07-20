@@ -47,8 +47,4 @@ class User extends Authenticatable
     public function aplicativos() {
         return $this->hasMany('App\Models\Aplicativo');
     }
-
-    public function aplicativos_temp() {
-        return $this->hasMany('App\Models\Aplicativo');
-    }
 }
